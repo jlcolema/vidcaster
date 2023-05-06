@@ -1,0 +1,102 @@
+{% extends "base.html" %}
+
+{% load users_tags %}
+{% load voting_tags %}
+{% load item_extras %}
+{% block title %}{{ selected_group.display_name }} - {{ current_site.name }}{% endblock title %}
+{% block bodyid %} id="{{ selected_group.short_name }}"{% endblock bodyid %}
+{% block bodyclass %} class="groups"{% endblock bodyclass %}
+{% block google-admanager %}{% endblock google-admanager %}
+
+{% block intro %}{% endblock intro %}
+
+{% block content %}
+			<div class="section">
+				<div class="page-header">
+					<h1>{{ selected_group.display_name }}{% if user.userprofile.site_member_test %} (<a href="{% url vidsf.groups.views.edit selected_group.id %}">edit</a>){% endif %}</h1>
+				</div>
+			</div>
+			<div class="section-offset">
+				<div class="section group-promo">
+					<div class="main-column">
+						{% if selected_group.masthead %}<a class="thumbnail" href="{{ first_item.get_absolute_url }}"><img src="{{ selected_group.masthead.url }}" /><span></span></a>{% endif %}
+					</div>
+					{% if selected_group.description %}
+					<div class="sub-column">
+						<h3>{{ selected_group.description }}</h3>
+						{% if not current_site.siteprofile.youtube_account %}
+							<p><a href="{{ selected_group.get_podcast_absolute_url }}" class="button"><span>Get the podcast</span></a></p>
+						{% endif %}
+					</div>
+					{% endif %}
+				</div>
+			</div>
+			<div class="section">
+				<div class="main-column">
+					{% if selected_items %}
+					<div id="recent-videos" class="block video-list">
+						<div class="block-header">
+							<h3>Recent Videos</h3>
+						</div>
+						<ol>
+		   					{% for item in selected_items %}
+							<li>
+								<a class="thumbnail" href="{{ item.get_absolute_url }}"><img src="{% fetch_thumbnail_url item 120 68 %}" alt="" /><span></span></a>
+								<p class="meta">{% if item.group %}<span class="group {{ item.group.short_name }}">{{ item.group.get_html_tag|safe }}</span>{% endif %}<span class="date">{{ item.pub_date|date:"F j, Y" }}</span></p>
+								<h4><a href="{{ item.get_absolute_url }}">{{ item.headline }}</a></h4>
+								{% if item.summary %}<p>{{ item.summary }}{% if current_site.siteprofile.allow_comments %}{% ifnotequal item.comments_count 0 %}<span class="comments"><a href="{{ item.get_absolute_url }}?autoplay=False#comments">{{ item.comments_count }}<span class="bubble"></span><span class="point"></span></a></span>{% endifnotequal %}{% endif %}</p>{% endif %}
+							</li>
+		   					{% endfor %}
+						</ol>
+						{% if total_items > 10 %}<div class="video-list-actions">
+							<p><a href="/{{ selected_group.short_name }}/archive/?page=2">View {{ total_items|add:"-10" }} more video{{ total_items|add:"-10"|pluralize }} from {{ selected_group.display_name }}&nbsp;&rarr;</a></p>
+						</div>{% endif %}
+					</div>
+					{% else %}
+					<p class="no-content">This {{ current_site.siteprofile.group_name|lower }} has no videos.</p>
+					{% endif %}
+				</div>
+				<div class="sub-column">
+					<div id="subscribe" class="block">
+						<div class="block-header">
+							<h3>Subscribe</h3>
+						</div>
+						<ul>
+							{% if not current_site.siteprofile.youtube_account %}
+								<li class="podcast"><a href="{{ selected_group.get_podcast_absolute_url }}">Get the podcast</a></li>
+								<li class="podcast-audio"><a href="{{ selected_group.get_audio_podcast_absolute_url }}">Get the audio&#8211;only podcast</a></li>
+							{% endif %}
+							<li class="rss"><a href="/feeds/{{ selected_group.short_name }}/">Be notified of new episodes by RSS</a></li>
+						</ul>
+					</div>
+					{% if current_site.siteprofile.allow_comments %}
+					{% if recent_comments_list %}
+					<div id="recent-comments" class="block">
+						<div class="block-header">
+							<h3>Recent Comments</h3>
+						</div>
+						<ol>
+						{% for comment in recent_comments_list %}
+							<li>
+								<div class="text">
+									<p>{{ comment.comment|truncatewords:17 }}</p>
+								</div>
+								<div class="meta">
+									<img src="{{ comment.get_poster_gravatar_url }}" alt="" />
+									<p><span class="author">{{ comment.get_poster_html_tag|safe }}</span> said about <span class="video"><a href="{{ comment.item.get_absolute_url }}">{{ comment.item.headline|truncatewords:5 }}</a></span></p>
+									<span class="point"></span>
+								</div>
+							</li>
+						{% endfor %}
+						</ol>
+					</div>
+					{% endif %}
+					{% endif %}
+					{% if selected_group.secondary_content_block %}
+					<div id="secondary-content-block" class="block">
+						{{ selected_group.secondary_content_block }}
+					</div>
+					{% endif %}
+				</div>
+			</div>
+{% endblock content %}

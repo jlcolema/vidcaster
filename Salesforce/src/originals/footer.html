@@ -1,0 +1,11 @@
+<div id="footer">
+	<div class="wrap">
+		<ul>
+			<!--li><a href="/feeds/recent/">RSS</a></li-->
+			{% if not user.is_authenticated %}
+			<li><a href="/login/">Log In</a></li>
+			{% endif %}
+		</ul>
+		<p>Powered by <a href="http://www.vidcaster.com">VidCaster</a></p>
+	</div>
+</div>

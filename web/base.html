@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
+	<meta charset="UTF-8" />
+
+	<title>{% block title %}{{ current_site.name }}{% endblock title %}</title>
+
+	{% block description %}<meta name="description" content="{{ current_site.description }}" />{% endblock description %}{% block meta %}{% endblock meta %}
+
+	{% block stylesheet %}
+
+	<!-- <link rel="stylesheet" href="{{ media_path }}css/styles.css" /> -->
+	<link rel="stylesheet" href="/custom.css" />
+	<link rel="stylesheet" href="http://www.smbls.com/work/vidcaster/-/css/custom.css" />
+	<!-- {% if user.is_authenticated %}<link rel="stylesheet" href="/media/css/userstate.css" />{% endif %} -->
+
+	{% endblock stylesheet %}
+
+	{% block feeds %}<link rel="alternate" type="application/rss+xml" title="{{ curent_site.name }}: Recent Videos RSS Feed" href="/feeds/recent/" />{% endblock feeds %}
+
+	{% block favicon %}{% if current_site.siteprofile.favicon %}<link rel="shortcut icon" href="{{ current_site.siteprofile.favicon.url }}" />{% endif %}{% endblock favicon %}
+
+	{% block google-admanager %}{% endblock google-admanager %}
+
+</head>
+
+<body{% block bodyid %}{% endblock bodyid %}{% block bodyclass %}{% endblock bodyclass %}>
+
+	<div id="container">
+
+		<!-- {% block userstate %}{% include "include/userstate.html" %}{% endblock userstate %}
+		{% block leaderboard %}{% endblock leaderboard %} -->
+
+		<div id="header" class="group">
+
+			{% block h1 %}<h1><a href="http://{{ current_site.domain }}/">{% if current_site.siteprofile.logo %}<img alt="{{ current_site.name }}" src="{{ current_site.siteprofile.logo.url }}" />{% else %}{{ current_site.name }}{% endif %}</a></h1>{% endblock h1 %}
+
+			{% block nav %}{% load item_extras %}{% get_groups as group_list %}
+
+			<div id="nav">
+
+				{% block pages %}{% load page_extras %}{% get_public_pages as page_list %}{% if page_list %}
+
+				<div id="pages">
+
+					<ul class="group">
+
+						<li id="nav-home"><a href="/">Home</a></li>
+
+						{% for page in page_list %}
+
+						<li id="nav-{{ page.url|cut:"/" }}"><a href="{{ page.url }}">{{ page.title }}</a></li>
+
+						{% endfor %}
+
+					</ul>
+
+				</div>{% endif %}{% endblock pages %}
+
+			</div>{% endblock nav %}
+
+			<p class="rss"><a href="/feeds/recent/">Subscribe</a></p>
+
+		</div>
+
+		{% block intro %}{% endblock intro %}
+
+		<div id="content">
+
+			{% block globalstatus %}
+
+				{% if form.non_field_errors %}
+
+					<div id="global-error">
+						{{ form.non_field_errors.as_ul }}
+					</div>
+
+				{% endif %}
+
+				{% if messages %}
+
+					<div id="messages">
+
+						<ul>{% for message in messages %}
+							<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li> 
+						{% endfor %}</ul> 
+
+					</div>  
+
+				{% endif %}
+
+			{% endblock globalstatus %}
+
+			{% block content %}{% endblock content %}
+
+		</div>
+
+		{% block footer %}{% include "include/footer.html" %}{% endblock footer %}
+
+	</div>
+
+	{% block site-scripts %}
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+
+	<script src="/media/js/vidcaster.js"></script>
+
+	{% endblock site-scripts %}
+
+	{% block page-scripts %}
+
+	<!--
+
+		Tabs for Home Page
+
+		Need to chain together for simplification.
+
+	-->
+
+	<script type="text/javascript">
+	
+		$(document).ready(function() {
+	
+			/* Category List Tabs */
+			
+			/* Default Action */
+	
+			$(".category-list .panel").hide(); //Hide all content
+			$(".category-list .tabs li:first").addClass("active").show(); //Activate first tab
+			$(".category-list .panel:first").show(); //Show first tab content
+	
+			/* On-Click Event */
+	
+			$(".category-list .tabs li").click(function() {
+				$(".category-list .tabs li").removeClass("active"); //Remove any "active" class
+				$(this).addClass("active"); //Add "active" class to selected tab
+				$(".category-list .panel").hide(); //Hide all tab content
+				var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
+				$(activeTab).show(); //Fade in the active content
+				return false;
+			});
+
+			/* Popular List Tabs */
+			
+			/* Default Action */
+	
+			$(".popular-list .panel").hide(); //Hide all content
+			$(".popular-list .tabs li:first").addClass("active").show(); //Activate first tab
+			$(".popular-list .panel:first").show(); //Show first tab content
+	
+			/* On-Click Event */
+	
+			$(".popular-list .tabs li").click(function() {
+				$(".popular-list .tabs li").removeClass("active"); //Remove any "active" class
+				$(this).addClass("active"); //Add "active" class to selected tab
+				$(".popular-list .panel").hide(); //Hide all tab content
+				var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
+				$(activeTab).show(); //Fade in the active content
+				return false;
+			});
+
+		});
+	
+	</script>
+
+	<!--[if (gte IE 6)&(lte IE 8)]>
+		<script>
+	
+			$(function(){
+				$(".featured ol li:last-child").addClass("last-child");
+				$(".video-list ol li:nth-child(3n)").addClass("third");
+			});
+	
+		</script>
+	<![endif]-->
+
+	{% endblock page-scripts %}
+
+	{% block analytics %}{% include "include/analytics/google-analytics.html" %}{% include "include/analytics/quantcast.html" %}{% endblock analytics %}
+
+</body>
+
+</html>

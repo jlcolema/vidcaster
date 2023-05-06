@@ -1,0 +1,844 @@
+/*-------------------------------------------
+	Reset
+-------------------------------------------*/
+
+html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, hgroup, menu, nav, section, time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	outline: 0;
+	font-size: 100%;
+	vertical-align: baseline;
+	background: transparent;
+}									
+
+article, aside, figure, footer, header, hgroup, nav, section {display: block;}
+
+img,
+object,
+embed {max-width: 100%;}
+
+html {overflow-y: scroll;}
+
+ol, ul {list-style: none;}
+
+blockquote, q {quotes: none;}
+
+blockquote:before, 
+blockquote:after, 
+q:before, 
+q:after {content: ''; content: none;}
+
+a {margin: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent;}
+
+del {text-decoration: line-through;}
+
+abbr[title], dfn[title] {border-bottom: 1px dotted #000; cursor: help;}
+
+table {border-collapse: collapse; border-spacing: 0;}
+th {font-weight: bold; vertical-align: bottom;}
+td {font-weight: normal; vertical-align: top;}
+
+hr {display: block; height: 1px; border: 0; border-top: 1px solid #ccc; margin: 1em 0; padding: 0;}
+
+input, select {vertical-align: middle;}
+
+pre {
+	white-space: pre;
+	white-space: pre-wrap;
+	white-space: pre-line;
+	word-wrap: break-word;
+}
+
+input[type="radio"] {vertical-align: text-bottom;}
+input[type="checkbox"] {vertical-align: bottom; *vertical-align: baseline;}
+.ie6 input {vertical-align: text-bottom;}
+
+select, input, textarea {font: 99% sans-serif;}
+
+table {font-size: inherit; font: 100%;}
+ 
+a:hover, a:active {outline: none;}
+
+small {font-size: 85%;}
+
+strong, th {font-weight: bold;}
+
+td, td img {vertical-align: top;} 
+
+sub, sup {font-size: 75%; line-height: 0; position: relative;}
+sup {top: -0.5em;}
+sub {bottom: -0.25em;}
+
+pre, code, kbd, samp {font-family: monospace, sans-serif;}
+
+.clickable,
+label, 
+input[type=button], 
+input[type=submit], 
+button {cursor: pointer;}
+
+button, input, select, textarea {margin: 0;}
+
+button {width: auto; overflow: visible;}
+ 
+.ie7 img {-ms-interpolation-mode: bicubic;}
+
+.ie6 html {filter: expression(document.execCommand("BackgroundImageCache", false, true));}
+
+.group:before, .group:after { content: "\0020"; display: block; height: 0; overflow: hidden; }  
+.group:after { clear: both; }  
+.group { zoom: 1; }  
+
+
+/*-------------------------------------------
+	Fonts
+-------------------------------------------*/
+
+
+@font-face {
+	font-family: 'VAG Rounded Webfont';
+	src: url('http://blogs.salesforce.com/type/vagroundedstd-thin-webfont.eot');
+	src: url('http://blogs.salesforce.com/type/vagroundedstd-thin-webfont.eot?#iefix') format('embedded-opentype'),
+		url('http://blogs.salesforce.com/type/vagroundedstd-thin-webfont.woff') format('woff'),
+		url('http://blogs.salesforce.com/type/vagroundedstd-thin-webfont.ttf') format('truetype'),
+		url('http://blogs.salesforce.com/type/vagroundedstd-thin-webfont.svg#VAGRoundedStdThin') format('svg');
+	font-weight: normal;
+	font-style: normal;
+	}
+
+@font-face {
+	font-family: 'VAG Rounded Webfont';
+	src: url('http://blogs.salesforce.com/type/vagroundedstd-bold-webfont.eot');
+	src: url('http://blogs.salesforce.com/type/vagroundedstd-bold-webfont.eot?#iefix') format('embedded-opentype'),
+		url('http://blogs.salesforce.com/type/vagroundedstd-bold-webfont.woff') format('woff'),
+		url('http://blogs.salesforce.com/type/vagroundedstd-bold-webfont.ttf') format('truetype'),
+		url('http://blogs.salesforce.com/type/vagroundedstd-bold-webfont.svg#VAGRoundedStdBold') format('svg');
+	font-weight: bold;
+	font-style: normal;
+	}
+
+
+/*-------------------------------------------
+	Base
+-------------------------------------------*/
+
+
+html { background: rgb(255, 255, 255) url(/work/salesforce/-/media/sky.jpg) center top repeat-x; }
+
+body {
+	font-size: 12px;
+	line-height: 18px;
+	font-family: Verdana, Helvetica, Arial, sans-serif;
+	color: rgb(102, 102, 102);
+	background: url(/work/salesforce/-/media/clouds.png) center top no-repeat;
+	}
+
+#container {}
+
+.wrap {
+	width: 960px;
+	margin: 0 auto;
+	}
+
+select, input, textarea {}
+
+h1, h2, h3, h4, h5, h6 {
+	color: rgb(255, 135, 0);
+	font-family: "VAG Rounded Webfont", "Arial Rounded MT Bold", sans-serif;
+	font-weight: normal;
+	}
+
+a {
+	color: rgb(102, 102, 102);
+	text-decoration: none;
+	}
+
+a:hover {}
+
+::-moz-selection {
+	color: rgb(255, 255, 255);
+	background: #fcd700;
+	text-shadow: none;
+	}
+
+::selection {
+	color: rgb(255, 255, 255);
+	background: #fcd700;
+	text-shadow: none;
+	} 
+
+a:link { -webkit-tap-highlight-color: #fcd700; } 
+
+ins {
+	color: #000;
+	background-color: #fcd700;
+	text-decoration: none;
+	}
+
+mark {
+	color: #000;
+	background-color: #fcd700;
+	font-style: italic;
+	font-weight: bold;
+	}
+
+
+/*-------------------------------------------
+	VidCaster Userbar
+-------------------------------------------*/
+
+#vidcaster-userbar { display: none; } /* Temporary */
+
+
+/*-------------------------------------------
+	Header
+-------------------------------------------*/
+
+
+#header {
+	margin: 50px 0;
+	background: rgb(0, 149, 199);
+	height: 36px;
+	}
+
+	#header .wrap {
+		position: relative;
+		z-index: 1;
+		}
+
+		.go-to {
+			font-size: 16px;
+			line-height: 22px;
+			}
+
+			.return {
+				position: absolute;
+				left: 0;
+				top: 7px;
+				z-index: 3;
+				}
+
+			.watch {
+				position: absolute;
+				right: 0;
+				top: 7px;
+				text-align: right;
+				z-index: 3;
+				}
+
+				.return a,
+				.watch a { color: rgb(255, 255, 255); }
+
+		#header h1 {
+			position: absolute;
+			left: 380px;
+			top: -23px;
+			text-indent: -9999px;
+			z-index: 5;
+			}
+	
+			#header h1 a {
+				display: block;
+				width: 200px;
+				height: 100px;
+				background: url(/work/salesforce/-/media/logo.png);
+				}
+	
+		#nav { display: none; }
+	
+		#search {}
+
+
+/*-------------------------------------------
+	Body
+-------------------------------------------*/
+
+
+#content {
+	width: 960px;
+	margin: 40px auto 0 auto;
+	}
+
+	.section-offset { margin-bottom: 40px; }
+
+	.groups .section-offset { margin-bottom: 20px; }
+
+		.section-offset .main-column { width: 630px; }
+
+		#details .section-offset .main-column {
+			float: none;
+			width: 835px;
+			height: 470px;
+			margin: 0 auto;
+			border: 7px solid rgb(255, 255, 255);
+			-webkit-box-shadow: 1px 2px 11px rgba(0, 0, 0, .35);
+			-moz-box-shadow: 1px 2px 11px rgba(0, 0, 0, .35);
+			box-shadow: 1px 2px 11px rgba(0, 0, 0, .35);
+			}
+
+		.groups .section-offset .main-column { display: none; }
+
+			.rotating-promo {
+				position: relative;
+				width: 630px;
+				height: 390px;
+				}
+
+				.rotating-promo .section-wrap {
+					width: 630px;
+					height: 390px;
+					overflow: hidden;
+					}
+
+					.rotating-promo .featured {
+						position: absolute;
+						left: 0;
+						top: 0;
+						font-size: 24px;
+						line-height: 30px;
+						font-weight: normal;
+						z-index: 5;
+						}
+
+					.rotating-promo ol {
+						height: 390px;
+						position: relative;
+						width: 99999px;
+						}
+
+						.rotating-promo li {
+							position: relative;
+							float: left;
+							width: 630px;
+							height: 390px;
+							z-index: 1;
+							}
+
+							.rotating-promo li .main-column {
+								position: absolute;
+								right: 0;
+								top: 0;
+								width: 400px;
+								height: 225px;
+								border: 4px solid rgb(255, 255, 255);
+								-webkit-box-shadow: -2px 2px 3px rgba(0, 0, 0, .35);
+								-moz-box-shadow: -2px 2px 3px rgba(0, 0, 0, .35);
+								box-shadow: -2px 2px 3px rgba(0, 0, 0, .35);
+								z-index: 5;
+								}
+
+								.rotating-promo li .main-column span {
+									position: absolute;
+									right: 20px;
+									bottom: 20px;
+									padding: 7px 15px;
+									font-size: 12px;
+									line-height: 16px;
+									text-align: center;
+									color: rgb(0, 0, 0);
+									background: rgb(255,220,114);
+									background: -moz-linear-gradient(top, rgba(255,220,114,1) 0%, rgba(252,196,0,1) 100%);
+									background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(255,220,114,1)), color-stop(100%,rgba(252,196,0,1)));
+									background: -webkit-linear-gradient(top, rgba(255,220,114,1) 0%,rgba(252,196,0,1) 100%);
+									background: -o-linear-gradient(top, rgba(255,220,114,1) 0%,rgba(252,196,0,1) 100%);
+									background: -ms-linear-gradient(top, rgba(255,220,114,1) 0%,rgba(252,196,0,1) 100%);
+									background: linear-gradient(top, rgba(255,220,114,1) 0%,rgba(252,196,0,1) 100%);
+									filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#ffdc72', endColorstr='#fcc400',GradientType=0 );
+									border: 1px solid rgb(0, 0, 0);
+									text-shadow: 0 1px 0 rgba(255, 255, 255, .65);
+									-webkit-border-radius: 3px;
+									-moz-border-radius: 3px;
+									border-radius: 3px;
+									z-index: 5;
+									}
+
+							.rotating-promo li .sub-column {
+								float: none;
+								width: 548px;
+								height: 128px;
+								margin: 40px 40px 0 0;
+								padding: 200px 20px 20px 20px;
+								-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, .65) inset;
+								-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, .65) inset;
+								box-shadow: 0 1px 0 rgba(255, 255, 255, .65) inset;
+								-webkit-border-radius: 5px;
+								-moz-border-radius: 5px;
+								border-radius: 5px;
+								border: 1px solid rgb(219, 220, 222);
+								background: rgb(243, 248, 252) url(/work/salesforce/-/media/dreamforce.png) 15px 15px no-repeat;
+								font-family: "VAG Rounded Webfont", "Arial Rounded MT Bold", sans-serif;
+								}
+
+								.rotating-promo li .sub-column .type {
+									margin-bottom: 5px;
+									font-size: 18px;
+									line-height: 24px;
+									text-transform: uppercase;
+									}
+
+								.rotating-promo li .sub-column h2 {
+									margin-bottom: 5px;
+									font-size: 32px;
+									line-height: 38px;
+									}
+
+								.rotating-promo li .sub-column .summary { display: none; }
+
+		.section-offset .sub-column {
+			float: right;
+			width: 310px;
+			}
+
+		.groups .section-offset .sub-column {
+			float: none;
+			width: auto;
+			}
+
+			.section-offset .sub-column #videos-by-product { margin: 5px 0 30px 0; }
+
+			#details #videos-by-product { margin: 5px 0 30px 0; }
+
+				.section-offset .sub-column #videos-by-product .block-header,
+				#details #videos-by-product .block-header { margin-bottom: 10px; }
+
+				.section-offset .sub-column #videos-by-product ul {}
+
+					.section-offset .sub-column #videos-by-product li,
+					#details #videos-by-product li {
+						float: left;
+						margin-right: 5px;
+						text-indent: -9999px;
+						}
+
+					#details #videos-by-product li { margin-right: 4px; }
+
+					#details #videos-by-product li:last-child { margin: 0; }
+
+						.section-offset .sub-column #videos-by-product li a,
+						#details #videos-by-product li a {
+							display: block;
+							width: 45px;
+							height: 45px;
+							background: url(/work/salesforce/-/media/products.png);
+							-webkit-border-radius: 5px;
+							-moz-border-radius: 5px;
+							border-radius: 5px;
+							-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .35);
+							-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .35);
+							box-shadow: 0 1px 2px rgba(0, 0, 0, .35);
+							}
+
+						.section-offset .sub-column #videos-by-product .radian a {}
+
+						.section-offset .sub-column #videos-by-product .site a,
+						#details #videos-by-product .site a { background-position: -45px 0; }
+
+						.section-offset .sub-column #videos-by-product .k a,
+						#details #videos-by-product .k a { background-position: -90px 0; }
+
+						.section-offset .sub-column #videos-by-product .data a,
+						#details #videos-by-product .data a { background-position: -135px 0; }
+
+						.section-offset .sub-column #videos-by-product .desk a,
+						#details #videos-by-product .desk a { background-position: -180px 0; }
+
+						.section-offset .sub-column #videos-by-product .rypple a,
+						#details #videos-by-product .rypple a { background-position: -225px 0; }
+
+						.section-offset .sub-column #videos-by-product li a:hover,
+						#details #videos-by-product li a:hover { opacity: 0.85; }
+
+			.section-offset .sub-column #popular-now {}
+
+				.section-offset .sub-column #popular-now .block-header { margin-bottom: 10px; }
+
+				.section-offset .sub-column #popular-now ol {}
+
+					.section-offset .sub-column #popular-now li {
+						float: left;
+						margin-right: 5px;
+						}
+
+						.section-offset .sub-column #popular-now li a {}
+
+						.section-offset .sub-column #popular-now li a:hover { opacity: 0.85; }
+
+							.section-offset .sub-column #popular-now li img {
+								width: 140px;
+								border: 2px solid rgb(255, 255, 255);
+								-webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .35);
+								-moz-box-shadow: 0 1px 2px rgba(0, 0, 0, .35);
+								box-shadow: 0 1px 2px rgba(0, 0, 0, .35);
+								-webkit-border-radius: 5px;
+								-moz-border-radius: 5px;
+								border-radius: 5px;
+								}
+
+			.rotating-promo .clone-left {
+			    left: -630px;
+			    position: absolute;
+			}
+			.rotating-promo .sub-column {}
+
+			.rotating-promo h2 {
+			    font-weight: bold;
+			    margin-top: 0;
+			    margin-bottom: 0.5357em;
+			}
+			.rotating-promo p {
+			    font-size: 1.4em;
+			    line-height: 1.43;
+			}
+
+			.rotating-promo .group { display: none; }
+			.rotating-promo .no-content h2 {
+			    margin-top: 1.4286em;
+			    margin-left: 0.7143em;
+			}
+			.rotating-promo .no-content p {
+			    margin-left: 1.4286em;
+			}
+			.rotating-promo .group a {
+			    color: #3f3f3f;
+			}
+
+			#featured-thumbnails { display: none; }
+
+			#featured-next,
+			#featured-previous {
+				font-size: 24px;
+				line-height: 30px;
+				}
+
+			#featured-next {
+				position: absolute;
+				right: 55px;
+				bottom: 10px;
+				z-index: 5;
+				}
+
+			#featured-previous {
+				position: absolute;
+				right: 75px;
+				bottom: 10px;
+				z-index: 5;
+				}
+
+	.section {}
+
+	.section:before, .section:after { content: "\0020"; display: block; height: 0; overflow: hidden; }  
+	.section:after { clear: both; }  
+	.section { zoom: 1; }  
+
+		.page-header {}
+
+			.page-header h1 {
+				margin-bottom: 10px;
+				font-size: 24px;
+				line-height: 30px;
+				}
+
+			#details .page-header h1 {
+				font-size: 42px;
+				line-height: 48px;
+				color: rgb(102, 102, 102);
+				}
+
+		#details .page-header { margin-bottom: 10px; }
+
+			#details .page-header .meta {
+				margin-bottom: 5px;
+				font-size: 18px;
+				line-height: 24px;
+				}
+
+				#details .page-header .meta a { color: rgb(128, 128, 128); }
+
+		.main-column {
+			float: left;
+			width: 600px;
+			}
+
+			#comments { display: none; }
+
+			#recent-videos {}
+
+				.block-header {}
+
+					h3 {
+						font-size: 24px;
+						line-height: 30px;
+						}
+
+				#recent-videos ol {}
+
+					#recent-videos li {
+						padding: 15px 0;
+						border-top: 1px solid rgb(206, 206, 206);
+						}
+
+						#recent-videos .thumbnail {
+							float: left;
+							width: 120px;
+							}
+
+						#recent-videos .details {
+							float: left;
+							width: 460px;
+							padding: 0 0 0 20px;
+							}
+
+							.meta {
+								font-size: 11px;
+								line-height: 16px;
+								color: rgb(128, 128, 128);
+								}
+
+							#related-videos .meta { display: none; }
+
+							h4 {
+								font-size: 18px;
+								line-height: 24px;
+								}
+
+								h4 a { color: rgb(0, 159, 198); }
+
+							.summary {}
+
+							#related-videos li {
+								float: left;
+								margin: 0 10px 10px 0;
+								}
+
+							#tab-related-videos h3 {
+								margin-bottom: 10px;
+								border-bottom: 1px dotted rgb(204, 204, 204);
+								}
+
+							#related-videos h4 { display: none; }
+
+		.section .sub-column {
+			float: right;
+			width: 290px;
+			padding: 10px;
+			border: 1px solid rgb(219, 220, 222);
+			-webkit-border-radius: 5px;
+			-moz-border-radius: 5px;
+			border-radius: 5px;
+			background: rgb(243, 248, 252);
+			-webkit-box-shadow: 0 1px 0 rgba(255, 255, 255, .65) inset, 0 2px 3px rgba(0, 0, 0, .2);
+			-moz-box-shadow: 0 1px 0 rgba(255, 255, 255, .65) inset, 0 2px 3px rgba(0, 0, 0, .2);
+			box-shadow: 0 1px 0 rgba(255, 255, 255, .65) inset, 0 2px 3px rgba(0, 0, 0, .2);
+			}
+
+		#details .section .sub-column {
+			float: right;
+			width: 290px;
+			padding: 0;
+			border: none;
+			-webkit-border-radius: 0;
+			-moz-border-radius: 0;
+			border-radius: 0;
+			background: none;
+			-webkit-box-shadow: none;
+			-moz-box-shadow: none;
+			box-shadow: none;
+			}
+
+		.groups .section-offset .section .sub-column {
+			float: none;
+			width: auto;
+			border: none;
+			padding: 0;
+			-webkit-border-radius: 0;
+			-moz-border-radius: 0;
+			border-radius: 0;
+			background: none;
+			-webkit-box-shadow: none;
+			-moz-box-shadow: none;
+			box-shadow: none;
+			}
+
+			.groups .section-offset .section .sub-column h3 {
+				font-size: 16px;
+				line-height: 22px;
+				color: rgb(102, 102, 102);
+				}
+
+			.groups .section-offset .section .sub-column p { display: none; }
+
+			.section .sub-column .block { margin-bottom: 20px; }
+
+			.section .sub-column .block:last-child { margin: 0; }
+
+				.section .sub-column .block-header {
+					margin-bottom: 10px;
+					border-bottom: 1px dotted rgb(204, 204, 204);
+					}
+
+				.section .sub-column #looking form {
+					position: relative;
+					margin-bottom: 10px;
+					z-index: 1;
+					}
+
+				.section .sub-column #looking ul {}
+
+					.section .sub-column #looking ul li {
+						float: left;
+						width: 50%;
+						}
+
+						.section .sub-column #looking ul li a { color: rgb(0, 159, 198); }
+
+				.section .sub-column #connect form {
+					position: relative;
+					margin-bottom: 10px;
+					z-index: 1;
+					}
+
+					.section .sub-column #looking form .input {
+						border: 0px;
+						width: 248px;
+						height: 30px;
+						padding: 0 35px 0 5px;
+						float: left;
+						color: #A4A5A4;
+						border: 1px solid rgb(195, 199, 200);
+						-webkit-border-radius: 3px;
+						-moz-border-radius: 3px;
+						border-radius: 3px;
+						margin-top: 0;
+						}
+
+					.section .sub-column #connect form input[type="text"] {
+						border: 0px;
+						width: 188px;
+						height: 30px;
+						padding: 0 95px 0 5px;
+						float: left;
+						color: #A4A5A4;
+						border: 1px solid rgb(195, 199, 200);
+						-webkit-border-radius: 3px;
+						-moz-border-radius: 3px;
+						border-radius: 3px;
+						margin-top: 0;
+						}
+
+					.section .sub-column #looking form #submit {
+						position: absolute;
+						right: 0;
+						top: 0;
+						margin: 0;
+						padding: 0;
+						width: 32px;
+						height: 32px;
+						background: rgb(255, 255, 255) url(/work/salesforce/-/media/search-icon.png) center center no-repeat;
+						border: 1px solid rgb(195, 199, 200);
+						-webkit-border-radius: 3px;
+						-moz-border-radius: 3px;
+						border-radius: 3px;
+						text-indent: -9999px;
+						z-index: 5;
+						}
+
+					.section .sub-column #connect form #subscribe_submit {
+						position: absolute;
+						right: 0;
+						top: 0;
+						margin: 0;
+						padding: 0 10px;
+						height: 32px;
+						border: 1px solid rgb(195, 199, 200);
+						color: rgb(255, 135, 0);
+						background: rgb(255, 255, 255);
+						-webkit-border-radius: 3px;
+						-moz-border-radius: 3px;
+						border-radius: 3px;
+						text-transform: uppercase;
+						z-index: 5;
+						}
+
+				.section .sub-column #connect ul {}
+
+					.section .sub-column #connect ul li {
+						float: left;
+						margin-right: 10px;
+						text-indent: -9999px;
+						}
+				
+						.section .sub-column #connect ul li a {
+							display: block;
+							width: 36px;
+							height: 36px;
+							background: url(/work/salesforce/-/media/social.png);
+							}
+
+						.section .sub-column #connect ul .twitter a { background-position: 0 0; }
+						.section .sub-column #connect ul .facebook a { background-position: -36px 0; }
+						.section .sub-column #connect ul .youtube a { background-position: -72px 0; }
+						.section .sub-column #connect ul .linkedin a { background-position: -108px 0; }
+						.section .sub-column #connect ul .flickr a { background-position: -144px 0; }
+						.section .sub-column #connect ul .rss a { background-position: -180px 0; }
+
+			.promotion {
+				margin: 15px 0 30px 0;
+				text-align: center;
+				}
+
+
+
+/*-------------------------------------------
+	Footer
+-------------------------------------------*/
+
+
+#footer {
+	margin: 20px 0 40px 0;
+	font-size: 11px;
+	line-height: 16px;
+	text-align: center;
+	}
+
+	#footer .wrap {
+		padding: 30px 0 0 0;
+		border-top: 1px dotted rgb(204, 204, 204);
+		}
+
+	.secondary-nav {}
+
+		.secondary-nav li {
+			display: inline;
+			padding: 0 3px 0 8px;
+			font-size: 8px;
+			line-height: 12px;
+			background: url(/work/salesforce/-/media/secondary-nav-separator.png) left center no-repeat;
+			}
+
+		.secondary-nav li:first-child { background: none; }
+
+			.secondary-nav li a {
+				font-size: 11px;
+				line-height: 16px;
+				color: rgb(128, 128, 128);
+				text-decoration: none;
+				}
+
+	.copyright {
+		margin: 18px 0 24px 0;
+		padding: 12px;
+		color: rgb(128, 128, 128);
+		background: rgb(255, 255, 255);
+		-webkit-border-radius: 6px;
+		-moz-border-radius: 6px;
+		border-radius: 6px;
+		-webkit-box-shadow: 0 0 1px rgba(0, 0, 0, .2), 0 2px 3px rgba(0, 0, 0, .2);
+		-moz-box-shadow: 0 0 1px rgba(0, 0, 0, .2), 0 2px 3px rgba(0, 0, 0, .2);
+		box-shadow: 0 0 1px rgba(0, 0, 0, .2), 0 2px 3px rgba(0, 0, 0, .2);
+		}
+
+		.copyright p { margin: 12px 0; }
+
+	#powered-by,
+	#powered-by a { color: rgb(187, 187, 187); }

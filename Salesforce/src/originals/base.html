@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>{% block title %}{{ current_site.name }}{% endblock title %}</title>
+		{% block description %}<meta name="description" content="{{ current_site.description }}" />{% endblock description %}{% block meta %}{% endblock meta %}
+		{% block GWO %}{% endblock GWO %}
+		{% block stylesheet %}<link rel="stylesheet" href="{{ media_path }}css/styles.css" />
+		<link rel="stylesheet" href="/custom.css" />
+		{% if user.is_authenticated %}<link rel="stylesheet" href="/media/css/userstate.css" />{% endif %}
+		<!--[if IE 7]>
+			<link rel="stylesheet" href="{{ media_path }}css/ie7.css" />
+		<![endif]-->
+		<!--[if IE 8]>
+			<link rel="stylesheet" href="{{ media_path }}css/ie8.css" />
+		<![endif]-->
+		<!--[if IE 9]>
+			<link rel="stylesheet" href="{{ media_path }}css/ie9.css" />
+		<![endif]-->
+		<!--[if IE]>
+			<link rel="stylesheet" href="/custom-ie.css" />
+		<![endif]-->{% endblock stylesheet %}
+		{% block feeds %}<link rel="alternate" type="application/rss+xml" title="{{ curent_site.name }}: Recent Videos RSS Feed" href="/feeds/recent/" />{% endblock feeds %}
+		{% block favicon %}{% if current_site.siteprofile.favicon %}<link rel="shortcut icon" href="{{ current_site.siteprofile.favicon.url }}" />{% endif %}{% endblock favicon %}{% block google-admanager %}{% endblock google-admanager %}
+	</head>
+	<body{% block bodyid %}{% endblock bodyid %}{% block bodyclass %}{% endblock bodyclass %}>
+		<div id="container">
+			{% block userstate %}{% include "include/userstate.html" %}{% endblock userstate %}
+			{% block leaderboard %}{% endblock leaderboard %}
+			<div id="header">
+				<div class="wrap">
+					{% block h1 %}<h1><a href="http://{{ current_site.domain }}/">{% if current_site.siteprofile.logo %}<img alt="{{ current_site.name }}" src="{{ current_site.siteprofile.logo.url }}" />{% else %}{{ current_site.name }}{% endif %}</a></h1>{% endblock h1 %}
+					{% block nav %}{% load item_extras %}{% get_groups as group_list %}<div id="nav">
+						{% if group_list %}<div id="shows">
+							<ul>
+								<li id="nav-shows">
+									<a href="#">Browse by {{ current_site.siteprofile.group_name|capfirst }}<span></span></a>
+									<ul id="shows-menu">{% for group in group_list %}
+										<li><a href="/{{ group.short_name }}/">{{ group.display_name }}</a></li>{% endfor %}
+									</ul>
+								</li>
+							</ul>
+						</div>{% endif %}
+						{% block pages %}{% load page_extras %}{% get_public_pages as page_list %}{% if page_list %}<div id="pages">
+							<ul>{% for page in page_list %}
+								<li id="nav-{{ page.url|cut:"/" }}"><a href="{{ page.url }}">{{ page.title }}</a></li>{% endfor %}
+							</ul>
+						</div>{% endif %}{% endblock pages %}
+					</div>{% endblock nav %}
+					{% block search %}{% include "include/search.html" %}{% endblock search %}
+				</div>
+			</div>
+			{% block intro %}{% endblock intro %}
+			<div id="content">
+				{% block globalstatus %}
+					{% if form.non_field_errors %}
+						<div id="global-error">
+							{{ form.non_field_errors.as_ul }}
+						</div>
+					{% endif %}
+					{% if messages %}
+						<div id="messages">
+							<ul>{% for message in messages %}
+								<li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li> 
+							{% endfor %}</ul> 
+						</div>  
+					{% endif %}
+				{% endblock globalstatus %}
+				{% block content %}{% endblock content %}
+			</div>
+			{% block footer %}{% include "include/footer.html" %}{% endblock footer %}
+		</div>
+		{% block site-scripts %}<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+		<script src="/media/js/vidcaster.js"></script>{% endblock site-scripts %}{% block page-scripts %}{% endblock page-scripts %}
+		{% block analytics %}{% include "include/analytics/google-analytics.html" %}{% endblock analytics %}
+	</body>
+</html>

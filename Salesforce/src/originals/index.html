@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+
+{% load users_tags %}
+{% load item_extras %}
+{% block bodyid %} id="home"{% endblock bodyid %}
+
+{% block google-admanager %}{% endblock google-admanager %}
+
+{% block intro %}{% endblock intro %}
+
+{% block content %}
+			<div class="section-offset">
+				{% if lead_item %}
+				<div class="section rotating-promo">
+					<div class="section-wrap">
+						<ol>
+							<li>
+								<div class="main-column">
+									<a class="thumbnail" href="{{ lead_item.get_absolute_url }}"><img src="{% fetch_thumbnail_url lead_item 640 360 %}" alt="" /><span></span></a>
+								</div>
+								<div class="sub-column">
+									{% if lead_item.group %}<p class="group {{ lead_item.group.short_name }}">{{ lead_item.group.get_html_tag|safe }}</p>{% endif %}
+									<h2><a href="{{ lead_item.get_absolute_url }}">{{ lead_item.headline }}</a></h2>
+									{% if lead_item.summary %}<p class="summary">{{ lead_item.summary }}</p>{% endif %}
+								</div>
+							</li>
+							{% if above_fold_list %}
+							{% for item in above_fold_list %}
+							<li>
+								<div class="main-column">
+									<a class="thumbnail" href="{{ item.get_absolute_url }}"><img src="{% fetch_thumbnail_url item 640 360 %}" alt="" /><span></span></a>
+								</div>
+								<div class="sub-column">
+									{% if item.group %}<p class="group {{ item.group.short_name }}">{{ item.group.get_html_tag|safe }}</p>{% endif %}
+									<h2><a href="{{ item.get_absolute_url }}">{{ item.headline }}</a></h2>
+									{% if item.summary %}<p class="summary">{{ item.summary }}</p>{% endif %}
+								</div>
+							</li>
+							{% endfor %}
+							{% endif %}
+						</ol>
+					</div>
+				</div>
+				{% else %}
+				{% if user.is_authenticated %}{% include "include/no-videos.html" %}{% endif %}
+				{% endif %}
+			</div>
+			<div class="section">
+				<div class="main-column">
+					{% if latest %}
+					<div id="recent-videos" class="block video-list">
+						<div class="block-header">
+							<h3>Recent Videos</h3>
+						</div>
+						<ol>
+		   					{% for item in latest %}
+							<li>
+								<a class="thumbnail" href="{{ item.get_absolute_url }}"><img src="{% fetch_thumbnail_url item 120 68 %}" alt="" /><span></span></a>
+								<p class="meta">{% if item.group %}<span class="group {{ item.group.short_name }}">{{ item.group.get_html_tag|safe }}</span>{% endif %}<span class="date">{{ item.pub_date|date:"F j, Y" }}</span></p>
+								<h4><a href="{{ item.get_absolute_url }}">{{ item.headline }}</a></h4>
+								{% if item.summary %}<p class="summary">{{ item.summary }} {% if current_site.siteprofile.allow_comments %}{% ifnotequal item.comments_count 0 %}<span class="comments"><a href="{{ item.get_absolute_url }}?autoplay=False#comments">{{ item.comments_count }}<span class="bubble"></span><span class="point"></span></a></span>{% endifnotequal %}{% endif %}</p>{% endif %}
+							</li>
+		   					{% endfor %}
+						</ol>
+						{% if total_items > 10 %}<div class="video-list-actions">
+							<p><a href="/videos/archive/?page=2">View {{ total_items|add:"-10" }} more video{{ total_items|add:"-10"|pluralize }}&nbsp;&rarr;</a></p>
+						</div>{% endif %}
+					</div>
+					{% endif %}
+				</div>
+				<div class="sub-column">
+					<div id="subscribe" class="block">
+						<div class="block-header">
+							<h3>Subscribe</h3>
+						</div>
+						<ul>
+							<li class="rss"><a href="/feeds/recent/">Be notified of new videos by RSS</a></li>
+							{% if twitter_screen_name %}<li class="twitter"><a href="http://twitter.com/{{ twitter_screen_name }}" target="_blank">Follow us on Twitter</a></li>{% endif %}
+							{% if facebook_page_id %}<li class="facebook"><a href="http://www.facebook.com/profile.php?id={{ facebook_page_id }}" target="_blank">Be a fan on Facebook</a></li>{% endif %}
+						</ul>
+					</div>
+					{% if current_site.siteprofile.allow_comments %}
+					{% if recent_comments_list %}
+					<div id="recent-comments" class="block">
+						<div class="block-header">
+							<h3>Recent Comments</h3>
+						</div>
+						<ol>
+						{% for comment in recent_comments_list %}
+							<li>
+								<div class="text">
+									<p>{{ comment.comment|truncatewords:17 }}</p>
+								</div>
+								<div class="meta">
+									<img src="{{ comment.get_poster_gravatar_url }}" alt="" />
+									<p><span class="author">{{ comment.get_poster_html_tag|safe }}</span> said about <span class="video"><a href="{{ comment.item.get_absolute_url }}">{{ comment.item.headline|truncatewords:5 }}</a></span></p>
+									<span class="point"></span>
+								</div>
+							</li>
+						{% endfor %}
+						</ol>
+					</div>
+					{% endif %}
+					{% endif %}
+					{% if top_viewed_items %}
+					<div id="top-items" class="block">
+						<div class="block-header">
+							<h3>Most Viewed This Week</h3>
+						</div>
+						<table cellspacing="0">
+							<tbody>
+								{% for top_item in top_viewed_items %}
+								<tr>
+									<td class="num-list"><em>{{ forloop.counter }}</em></td>
+									<td class="headline"><a href="{{ top_item.get_absolute_url }}">{{ top_item.headline }}</a></td>
+								</tr>
+			                	{% endfor %}					
+							</tbody>
+						</table>
+					</div>
+					{% endif %}
+				</div>
+			</div>
+{% endblock content %}

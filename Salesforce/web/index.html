@@ -1,0 +1,218 @@
+{% extends "base.html" %}
+
+{% load users_tags %}
+{% load item_extras %}
+{% block bodyid %} id="home"{% endblock bodyid %}
+
+{% block google-admanager %}{% endblock google-admanager %}
+
+{% block intro %}{% endblock intro %}
+
+{% block content %}
+			<div class="section-offset group">
+
+				<div class="main-column">
+
+				{% if lead_item %}
+				<div class="section rotating-promo">
+					<div class="section-wrap">
+	
+						<h2 class="featured">Featured</h2>
+
+						<ol>
+							<li>
+								<div class="main-column">
+									<a class="thumbnail" href="{{ lead_item.get_absolute_url }}"><img src="{% fetch_thumbnail_url lead_item 640 360 %}" alt="" /><span>Watch Now</span></a>
+								</div>
+								<div class="sub-column">
+
+									<p class="type">Dreamforce &ndash; Interviews</p>
+									{% if lead_item.group %}<p class="group {{ lead_item.group.short_name }}">{{ lead_item.group.get_html_tag|safe }}</p>{% endif %}
+									<h2><a href="{{ lead_item.get_absolute_url }}">{{ lead_item.headline }}</a></h2>
+									{% if lead_item.summary %}<p class="summary">{{ lead_item.summary }}</p>{% endif %}
+									<p class="meta">{% if lead_item.group %}<span class="group {{ lead_item.group.short_name }}">{{ lead_item.group.get_html_tag|safe }}</span>{% endif %}<span class="date">{{ lead_item.pub_date|date:"F j, Y" }}</span></p>
+								</div>
+							</li>
+							{% if above_fold_list %}
+							{% for item in above_fold_list %}
+							<li>
+								<div class="main-column">
+									<a class="thumbnail" href="{{ item.get_absolute_url }}"><img src="{% fetch_thumbnail_url item 640 360 %}" alt="" /><span>Watch Now</span></a>
+								</div>
+								<div class="sub-column">
+									<p class="type">Dreamforce &ndash; Interviews</p>
+									{% if item.group %}<p class="group {{ item.group.short_name }}">{{ item.group.get_html_tag|safe }}</p>{% endif %}
+									<h2><a href="{{ item.get_absolute_url }}">{{ item.headline }}</a></h2>
+									{% if item.summary %}<p class="summary">{{ item.summary }}</p>{% endif %}
+									<p class="meta">{% if item.group %}<span class="group {{ item.group.short_name }}">{{ item.group.get_html_tag|safe }}</span>{% endif %}<span class="date">{{ item.pub_date|date:"F j, Y" }}</span></p>
+								</div>
+							</li>
+							{% endfor %}
+							{% endif %}
+						</ol>
+
+					</div>
+
+				</div>
+				{% else %}
+				{% if user.is_authenticated %}{% include "include/no-videos.html" %}{% endif %}
+				{% endif %}
+
+				</div>
+
+				<div class="sub-column">
+
+					<div id="videos-by-product" class="block">
+
+						<div class="block-header">
+							<h3>Videos by Product</h3>
+						</div>
+
+						<ul class="group">
+							<li class="radian"><a href="http://salesforcedemo.vidcaster.com/rypple/">Radian6</a></li>
+							<li class="site"><a href="http://salesforcedemo.vidcaster.com/rypple/">Site</a></li>
+							<li class="k"><a href="http://salesforcedemo.vidcaster.com/rypple/">K</a></li>
+							<li class="data"><a href="http://salesforcedemo.vidcaster.com/rypple/">Data.com</a></li>
+							<li class="desk"><a href="http://salesforcedemo.vidcaster.com/rypple/">Desk.com</a></li>
+							<li class="rypple"><a href="http://salesforcedemo.vidcaster.com/rypple/">Rypple</a></li>
+						</ul>
+
+					</div>
+
+					<div id="popular-now" class="block">
+
+						<div class="block-header">
+							<h3>Popular Now</h3>
+						</div>
+
+						<ol class="block video-list group">
+
+							<li><a class="thumbnail" href="http://salesforcedemo.vidcaster.com/7atrh/nbcuniversals-social-enterprise-story/"><img src="http://smbls.com/work/salesforce/-/media/popular-now-thumbnail.jpg" alt=""></a></li>
+							<li><a class="thumbnail" href="http://salesforcedemo.vidcaster.com/7atrh/nbcuniversals-social-enterprise-story/"><img src="http://smbls.com/work/salesforce/-/media/popular-now-thumbnail.jpg" alt=""></a></li>
+							<li><a class="thumbnail" href="http://salesforcedemo.vidcaster.com/7atrh/nbcuniversals-social-enterprise-story/"><img src="http://smbls.com/work/salesforce/-/media/popular-now-thumbnail.jpg" alt=""></a></li>
+							<li><a class="thumbnail" href="http://salesforcedemo.vidcaster.com/7atrh/nbcuniversals-social-enterprise-story/"><img src="http://smbls.com/work/salesforce/-/media/popular-now-thumbnail.jpg" alt=""></a></li>
+
+						</ol>
+					</div>
+
+				</div>
+
+			</div>
+			<div class="section">
+				<div class="main-column">
+					{% if latest %}
+
+					<div id="recent-videos" class="block video-list">
+
+						<div class="block-header">
+							<h3>Recent Videos</h3>
+						</div>
+
+						<ol>
+
+		   					{% for item in latest %}
+
+							<li class="group">
+
+								<div class="thumbnail">
+				
+									<a href="{{ item.get_absolute_url }}"><img src="{% fetch_thumbnail_url item 120 68 %}" alt="" /><span></span></a>
+
+								</div>
+
+								<div class="details">
+
+									<p class="meta">{% if item.group %}<span class="group {{ item.group.short_name }}">{{ item.group.get_html_tag|safe }}</span> &ndash; {% endif %}<span class="date">{{ item.pub_date|date:"F j, Y" }}</span></p>
+									<h4><a href="{{ item.get_absolute_url }}">{{ item.headline }}</a></h4>
+									{% if item.summary %}<p class="summary">{{ item.summary }} {% if current_site.siteprofile.allow_comments %}{% ifnotequal item.comments_count 0 %}<span class="comments"><a href="{{ item.get_absolute_url }}?autoplay=False#comments">{{ item.comments_count }}<span class="bubble"></span><span class="point"></span></a></span>{% endifnotequal %}{% endif %}</p>{% endif %}
+
+								</div>
+								
+							</li>
+
+		   					{% endfor %}
+
+						</ol>
+
+						{% if total_items > 10 %}<div class="video-list-actions">
+							<p><a href="/videos/archive/?page=2">View {{ total_items|add:"-10" }} more video{{ total_items|add:"-10"|pluralize }}&nbsp;&rarr;</a></p>
+						</div>{% endif %}
+
+					</div>
+					{% endif %}
+				</div>
+				<div class="sub-column">
+
+					<div id="looking" class="block">
+
+						<div class="block-header">
+							<h3>Looking for Something?</h3>
+						</div>
+
+						<form class="searchform group" method="get" action="http://blogs.salesforce.com/.services/blog/6a00e54ee3905b8833014e8a8466cb970d/search"> 
+							<input type="text" id="s" class="input" name="filter.q" results="5" value="search" onblur="if (this.value == '')  {this.value = 'search';}" onfocus="if (this.value == 'search') {this.value = '';}"> 
+							<input type="submit" width="25" height="25" id="submit" class="submit_button alt_font" name="submit_button" alt="Search" value="Search"> 
+						</form>
+							
+						<ul class="group">
+							<li><a href="http://blogs.salesforce.com/strategy/content-marketing/">Content Marketing</a></li>
+							<li><a href="http://blogs.salesforce.com/strategy/corporate-culture/">Corporate Culture</a></li>
+							<li><a href="http://blogs.salesforce.com/strategy/events/">Events Marketing</a></li>
+							<li><a href="http://blogs.salesforce.com/strategy/featured-post/">Featured</a></li>
+							<li><a href="http://blogs.salesforce.com/strategy/online-marketing/">Online Marketing</a></li>
+							<li><a href="http://blogs.salesforce.com/strategy/social-media/">Social Media</a></li>
+							<li><a href="http://blogs.salesforce.com/strategy/video-strategy/">Video Strategy</a></li>
+						</ul>
+						
+					</div>
+
+					<div id="connect" class="block">
+
+						<div class="block-header">
+							<h3>Connect with Salesforce</h3>
+						</div>
+
+						<form class="feedburner group" action="http://feedburner.google.com/fb/a/mailverify" method="post" target="popupwindow" onsubmit="window.open('http://feedburner.google.com/fb/a/mailverify?uri=blogs/RtdE', 'popupwindow', 'scrollbars=yes,width=550,height=520');return true">
+							<input type="text" id="feedurl" size="15" name="email" value="email" onblur="if (this.value == '')  {this.value = 'email';}" onfocus="if (this.value == 'email') {this.value = '';}" />
+							<input type="hidden" value="" id="bloguri" name="uri"/>
+							<input type="hidden" name="loc" value="en_US"/>
+							<input type="submit" id="subscribe_submit" class="alt_font" value="Subscribe" />
+						</form> 
+
+						<script language="JavaScript">
+						var blogName = "strategy";
+						var blogId = "";
+						if (blogName == "community"){
+							blogId = "blogs/AoRU";
+						} else if (blogName == "product"){
+							blogId = "blogs/pKlI";
+						} else if (blogName == "strategy"){
+							blogId = "blogs/duHZ";
+						} else {
+							blogId = "blogs/RtdE";
+						} 
+						document.getElementById('bloguri').value=blogId;
+						</script>
+
+						<ul class="social group">
+							<li class="twitter"><a href="https://twitter.com/salesforce" title="Follow on Twitter" target="_blank">Twitter</a></li> 
+							<li class="facebook"><a href="http://facebook.com/salesforce" title="Follow on Facebook" target="_blank">facebook</a></li> 
+							<li class="youtube"><a href="http://www.youtube.com/salesforce" title="Follow on YouTube" target="_blank">YouTube</a></li> 
+							<li class="linkedin"><a href="http://www.linkedin.com/company/salesforce.com/products" title="Follow on LinkedIn" target="_blank">LinkedIn</a></li> 
+							<li class="flickr"><a href="http://www.flickr.com/photos/salesforce" title="Follow on Flickr" target="_blank">Flickr</a></li> 
+							<li class="rss"><a href="http://feeds.feedburner.com/blogs/RtdE" title="Subscribe via RSS" target="_blank">RSS</a></li> 
+						</ul>
+
+					</div>
+
+				</div>
+
+			</div>
+
+			<div class="promotion">
+
+				<a href="#"><img src="http://smbls.com/work/salesforce/-/media/promo.jpg" alt="Promotion" /></a>
+
+			</div>
+
+{% endblock content %}

@@ -1,0 +1,103 @@
+.body {
+    width: 100% !important;
+    -webkit-text-size-adjust: none;
+    margin: 0;
+    padding: 0;
+    background-color: #000000;
+    }
+
+.img {
+	display: inline;
+	margin-bottom: 10px;
+	border: none;
+	font-size: 14px;
+	font-weight: bold;
+	height: auto;
+	line-height: 100%;
+	outline: none;
+	text-decoration: none;
+	text-transform: capitalize;
+	}
+
+.backgroundTable {
+    height: 100% !important;
+    margin: 0;
+    padding: 0;
+    width: 100% !important;
+    background-color: #000000;
+    }
+
+.templateContainer { border: 0px none #000000; }
+
+.h1 {
+    color: #f68933;
+    display: block;
+    font-family: Arial;
+    font-size: 26px;
+    font-weight: bold;
+    line-height: 100%;
+    margin-bottom: 15px;
+    text-align: left;
+    }
+
+.h2 {
+    color: #202020;
+    display: block;
+    font-family: Arial;
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 100%;
+    margin-bottom: 10px;
+    text-align: left;
+    }
+
+.h3 {
+    color: #202020;
+    display: block;
+    font-family: Arial;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 100%;
+    margin-bottom: 10px;
+    text-align: left;
+    }
+
+.h4 {
+    color: #202020;
+    display: block;
+    font-family: Arial;
+    font-size: 20px;
+    font-weight: bold;
+    line-height: 100%;
+    margin-bottom: 10px;
+    text-align: left;
+    }
+
+.templateContainer { background-color: #000000; }
+
+.bodyContent { background-color: #000000; }
+
+.bodyContentContainer {
+    color: #555654;
+    font-family: Arial;
+    font-size: 12px;
+    line-height: 100%;
+    text-align: left;
+    height: 470px;
+    padding: 50px 300px 50px 50px;
+    background: url(https://origin.ih.constantcontact.com/fs095/1110244532532/img/2.jpg) center top no-repeat;
+    }
+
+.p {
+    font-size: 12px;
+    line-height: 16px;
+    text-align: left;
+    color: #555654;
+    font-family: Arial;
+    }
+
+.link {
+    color: #f68933;
+    font-weight: normal;
+    text-decoration: underline;
+    }

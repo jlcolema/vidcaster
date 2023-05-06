@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load item_extras %}
+{% load voting_tags %}
+
+{% block title %}{% if header %}{{ header }} ({{ first_on_page }}-{{ last_on_page }} of {{ hits }} video{{ hits|pluralize }}){% else %}Videos {{ first_on_page }}-{{ last_on_page }} of {{ hits }} matching "{{ query }}"{% endif %} - {{ current_site.name }}{% endblock title %}
+{% block bodyid %} id="list"{% endblock bodyid %}
+
+{% block content %}
+	<div class="section">
+		<div class="page-header">
+			<h1>{% if header %}{{ header }}{% else %}Videos matching &#8220;{{ query }}&#8221;{% endif %}</h1>
+		</div>
+	</div>
+	<div class="section">
+		<div class="main-column">
+			{% if item_list %}
+			<div class="paginator paginator-top">
+				<p class="displaying">Displaying {{ first_on_page }}-{{ last_on_page }} of {{ hits }} video{{ hits|pluralize }}.</p>
+				{% if is_paginated %}<p class="pages">{% paginator %}</p>{% endif %}
+			</div>
+			<div class="block video-list">
+				<ol>
+					{% for item in item_list %}
+					<li>
+						<a class="thumbnail" href="{{ item.get_absolute_url }}"><img src="{% fetch_thumbnail_url item 120 68 %}" alt="" /><span></span></a>
+						<p class="meta">{% if item.group %}<span class="group {{ item.group.short_name }}">{{ item.group.get_html_tag|safe }}</span>{% endif %}<span class="date">{{ item.pub_date|date:"F j, Y" }}</span></p>
+						<h4><a href="{{ item.get_absolute_url }}">{{ item.headline }}</a></h4>
+						{% if item.summary %}<p>{{ item.summary }}{% if current_site.siteprofile.allow_comments %}{% ifnotequal item.comments_count 0 %}<span class="comments"><a href="{{ item.get_absolute_url }}?autoplay=False#comments">{{ item.comments_count }}<span class="bubble"></span><span class="point"></span></a></span>{% endifnotequal %}{% endif %}</p>{% endif %}
+					</li>
+					{% empty %}
+					<li><p>No videos match your query.</p></li>
+					{% endfor %}
+				</ol>
+			</div>
+			{% if is_paginated %}
+			<div class="paginator paginator-bottom">
+				<p class="pages">{% paginator %}</p>
+			</div>
+			{% endif %}
+			{% else %}
+			<p class="no-content">{% if noitems %}{{ noitems }}{% else %}No videos match your query.{% endif %}</p>
+			{% endif %}
+		</div>
+	</div>
+{% endblock content %}

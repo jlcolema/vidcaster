@@ -1,0 +1,340 @@
+{% extends "base.html" %}
+
+{% load users_tags %}
+{% load item_extras %}
+{% block bodyid %} id="home"{% endblock bodyid %}
+
+{% block google-admanager %}{% endblock google-admanager %}
+
+{% block intro %}{% endblock intro %}
+
+{% block content %}
+
+			<div class="section featured">
+
+				{% if above_fold_list %}
+
+				<div class="main-column">
+
+					<a class="thumbnail" href="{{ lead_item.get_absolute_url }}"><img src="{% fetch_thumbnail_url lead_item 528 300 %}" alt="" /><span></span></a>
+
+					<h2 class="title"><a href="{{ lead_item.get_absolute_url }}">{{ lead_item.headline }}</a></h2>
+
+					<p class="meta group">
+
+						<span class="date">Posted on {{ lead_item.pub_date|date:"F j, Y" }}</span>
+
+						{% if lead_item.group %}
+						
+						<span class="category {{ lead_item.group.short_name }}">Category: {{ lead_item.group.get_html_tag|safe }}</span>
+						
+						{% endif %}
+
+					</p>
+
+					{% if lead_item.summary %}<p class="summary">{{ lead_item.summary }}</p>{% endif %}
+
+					<p><a href="{{ lead_item.get_absolute_url }}">More information&hellip;</a></p>
+
+				</div>
+
+				{% endif %}
+
+				{% if lead_item %}
+
+				<div class="sub-column">
+
+					<div id="featured-videos" class="block video-list">
+
+						<h3>Featured Videos</h3>
+	
+						<ol class="group">
+	
+							{% for item in above_fold_list %}
+	
+							<li>
+	
+								<a class="thumbnail" href="{{ item.get_absolute_url }}"><img src="{% fetch_thumbnail_url item 245 175 %}" alt="" /><span></span></a>
+	
+								<h3 class="title"><a href="{{ item.get_absolute_url }}">{{ item.headline }}</a></h3>
+	
+							</li>
+	
+							{% endfor %}
+	
+						</ol>
+
+					</div>
+
+				</div>
+
+				{% else %}
+				{% if user.is_authenticated %}{% include "include/no-videos.html" %}{% endif %}
+				{% endif %}
+
+			</div>
+
+			<div class="section category-list">
+
+				<div class="sub-column">
+
+					{% load item_extras %}{% get_groups as group_list %}
+					
+					{% if group_list %}
+				
+					<ul class="selector tabs">
+					
+						{% for group in group_list %}
+						
+						<li><a href="#{{ group.short_name }}">{{ group.display_name }}</a></li>
+						
+						{% endfor %}
+					
+					</ul>
+				
+					{% endif %}
+
+				</div>
+
+				<div class="main-column">
+
+					{% load item_extras %}{% get_groups as group_list %}
+
+					{% if below_fold_list %}
+
+					{% for group in group_list %}
+
+					<div id="{{ group.short_name }}" class="block video-list panel">
+
+						<div class="block-header">
+
+							<h3>{{ group.short_name }}</h3>
+
+						</div>
+
+						<ol class="block video-list group">
+
+		   					{% for item in below_fold_list %}
+
+							<li>
+
+								<a class="thumbnail" href="{{ item.get_absolute_url }}"><img src="{% fetch_thumbnail_url item 200 120 %}" alt="" /><span></span></a>
+
+								<h4 class="title"><a href="{{ item.get_absolute_url }}">{{ item.headline }}</a></h4>
+
+							</li>
+
+		   					{% endfor %}
+
+						</ol>
+
+						{% if total_items > 10 %}
+
+						<div class="video-list-actions">
+
+							<p><a href="/videos/archive/?page=2">View {{ total_items|add:"-10" }} more video{{ total_items|add:"-10"|pluralize }}&nbsp;&rarr;</a></p>
+
+						</div>
+
+						{% endif %}
+
+					</div>
+
+					{% endfor %}
+
+					{% endif %}
+
+				</div>
+
+			</div>
+
+			<!-- Most Viewed -->
+
+			<div class="section popular-list">
+
+				<div class="sub-column">
+
+					<ul class="selector tabs">
+						<li><a href="#most-popular">Most Popular</a></li>
+						<li><a href="#most-viewed">Most Viewed</a></li>
+						<li><a href="#this-week">This Week</a></li>
+						<li><a href="#last-week">Last Week</a></li>
+					</ul>
+
+				</div>
+
+				<div class="main-column">
+
+					<!-- Most Popular -->
+
+					<div id="most-popular" class="block video-list panel">
+
+						{% if top_viewed_items %}
+
+						<div class="block-header">
+
+							<h3>Most Popular</h3>
+
+						</div>
+
+						<ol class="group">
+
+		   					{% for item in top_viewed_items %}
+
+							<li>
+
+								<a class="thumbnail" href="{{ item.get_absolute_url }}"><img src="{% fetch_thumbnail_url item 200 120 %}" alt="" /><span></span></a>
+
+								<h4 class="title"><a href="{{ item.get_absolute_url }}">{{ item.headline }}</a></h4>
+
+							</li>
+
+		   					{% endfor %}
+
+						</ol>
+
+						{% if total_items > 10 %}
+
+						<div class="video-list-actions">
+
+							<p><a href="/videos/archive/?page=2">View {{ total_items|add:"-10" }} more video{{ total_items|add:"-10"|pluralize }}&nbsp;&rarr;</a></p>
+
+						</div>
+
+						{% endif %}
+
+						{% endif %}
+
+					</div>
+
+					<!-- Most Viewed -->
+
+					<div id="most-viewed" class="block video-list panel">
+
+						{% if top_viewed_items %}
+
+						<div class="block-header">
+
+							<h3>Most Viewed</h3>
+
+						</div>
+
+						<ol class="group">
+
+		   					{% for item in top_viewed_items %}
+
+							<li>
+
+								<a class="thumbnail" href="{{ item.get_absolute_url }}"><img src="{% fetch_thumbnail_url item 200 120 %}" alt="" /><span></span></a>
+
+								<h4 class="title"><a href="{{ item.get_absolute_url }}">{{ item.headline }}</a></h4>
+
+							</li>
+
+		   					{% endfor %}
+
+						</ol>
+
+						{% if total_items > 10 %}
+
+						<div class="video-list-actions">
+
+							<p><a href="/videos/archive/?page=2">View {{ total_items|add:"-10" }} more video{{ total_items|add:"-10"|pluralize }}&nbsp;&rarr;</a></p>
+
+						</div>
+
+						{% endif %}
+
+						{% endif %}
+
+					</div>
+
+					<!-- Most Viewed This Week -->
+
+					<div id="most-viewed-this-week" class="block video-list panel">
+
+						{% if top_viewed_items %}
+
+						<div class="block-header">
+
+							<h3>Most Viewed This Week</h3>
+
+						</div>
+
+						<ol class="group">
+
+		   					{% for item in top_viewed_items %}
+
+							<li>
+
+								<a class="thumbnail" href="{{ item.get_absolute_url }}"><img src="{% fetch_thumbnail_url item 200 120 %}" alt="" /><span></span></a>
+
+								<h4 class="title"><a href="{{ item.get_absolute_url }}">{{ item.headline }}</a></h4>
+
+							</li>
+
+		   					{% endfor %}
+
+						</ol>
+
+						{% if total_items > 10 %}
+
+						<div class="video-list-actions">
+
+							<p><a href="/videos/archive/?page=2">View {{ total_items|add:"-10" }} more video{{ total_items|add:"-10"|pluralize }}&nbsp;&rarr;</a></p>
+
+						</div>
+
+						{% endif %}
+
+						{% endif %}
+
+					</div>
+
+					<!-- Most Viewed Last Week -->
+
+					<div id="most-viewed-last-week" class="block video-list panel">
+
+						{% if top_viewed_items %}
+
+						<div class="block-header">
+
+							<h3>Most Viewed Last Week</h3>
+
+						</div>
+
+						<ol class="group">
+
+		   					{% for item in top_viewed_items %}
+
+							<li>
+
+								<a class="thumbnail" href="{{ item.get_absolute_url }}"><img src="{% fetch_thumbnail_url item 200 120 %}" alt="" /><span></span></a>
+
+								<h4 class="title"><a href="{{ item.get_absolute_url }}">{{ item.headline }}</a></h4>
+
+							</li>
+
+		   					{% endfor %}
+
+						</ol>
+
+						{% if total_items > 10 %}
+
+						<div class="video-list-actions">
+
+							<p><a href="/videos/archive/?page=2">View {{ total_items|add:"-10" }} more video{{ total_items|add:"-10"|pluralize }}&nbsp;&rarr;</a></p>
+
+						</div>
+
+						{% endif %}
+
+						{% endif %}
+
+					</div>
+
+				</div>
+
+			</div>
+
+{% endblock content %}

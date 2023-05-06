@@ -1,0 +1,63 @@
+{% load users_tags %}
+{% load voting_tags %}
+{% load item_extras %}
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>{{ display_name }}</title>
+		<link rel="stylesheet" href="{{ media_path }}css/styles.css"  />
+		<link rel="stylesheet" href="{{ media_path }}css/show-widget.css" />
+		<link rel="stylesheet" href="/custom.css" />
+		<!--[if IE 7]>
+			<link rel="stylesheet" href="{{ media_path }}css/ie7.css" media="all" />
+		<![endif]-->
+		<!--[if IE 8]>
+			<link rel="stylesheet" href="{{ media_path }}css/ie8.css" media="all" />
+		<![endif]-->
+		<!--[if IE]>
+			<link rel="stylesheet" href="/custom-ie.css" />
+		<![endif]-->
+	</head>
+	<body id="{{ short_name }}" class="show-widget">
+		<div id="header"{% if not sub_text %} class="no-sub-text"{% endif %}>
+			<h1><a href="http://{{ current_site.domain }}/">{% if current_site.siteprofile.logo %}<img alt="{{ current_site.name }}" src="{{ current_site.siteprofile.logo.url }}" />{% else %}{{ current_site.name }}{% endif %}</a></h1>
+			<h2>{{ display_name }}</h2>
+			{% if sub_text %}<p>{{ sub_text }}</p>{% endif %}
+		</div>
+		<div id="content">
+			<div class="section">
+				<div class="main-column">
+					<iframe title="{{ current_site.name }} Video Player" width="480" height="270" src="http://{{ current_site.domain }}/player/{{ first_item.code }}/native/{% if autoplay %}autoplay/{% endif %}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+					<h2>{{ first_item.headline }}</h2>
+					<p>{{ first_item.summary }}</p>
+				</div>
+				<div class="sub-column">
+					{% if selected_items %}
+					<div class="widget-tabs block">
+						<div class="tabs">
+							<ul>
+								<li id="tab-related-videos" class="on">Recent Videos<span></span></li>
+							</ul>
+						</div>
+						<div class="content">
+							<div id="related-videos" class="video-list on">
+								<ol>
+								{% for item in selected_items %}
+									<li>
+										<a class="thumbnail" href="?item={{ item.code }}&autoplay=True"><img src="{% fetch_thumbnail_url item 120 68 %}" alt="" /><span></span></a>
+										<h4><a href="?item={{ item.code }}&autoplay=True">{{ item.headline }}</a></h4>
+									</li>
+								{% endfor %}
+								</ol>
+							</div>
+						</div>
+					</div>
+					{% endif %}
+				</div>
+			</div>
+		</div>
+		{% block analytics %}{% include "include/analytics/google-analytics.html" %}{% endblock analytics %}
+	</body>
+</html>

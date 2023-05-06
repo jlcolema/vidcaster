@@ -1,0 +1,26 @@
+<div id="footer" class="group">
+
+	<p class="powered-by"><a href="http://www.vidcaster.com">Powered by: <strong>VidCaster</strong></a></p>
+
+	<div id="subscribe" class="subscribe block">
+
+		<!--
+
+			Don't forget to add conditions back to Twitter and Facebook when complete with design
+
+			{% if twitter_screen_name %}<li class="twitter"><a href="http://twitter.com/{{ twitter_screen_name }}" target="_blank">Twitter</a></li>{% endif %}
+			{% if facebook_page_id %}<li class="facebook"><a href="http://www.facebook.com/profile.php?id={{ facebook_page_id }}" target="_blank">Facebook</a></li>{% endif %}
+
+		-->
+
+		<ul class="group">
+			<li class="rss"><a href="/feeds/recent/">Subscribe</a></li>
+			<li class="twitter"><a href="http://twitter.com/{{ twitter_screen_name }}" target="_blank">Twitter</a></li>
+			<li class="facebook"><a href="http://www.facebook.com/profile.php?id={{ facebook_page_id }}" target="_blank">Facebook</a></li>
+		</ul>
+
+	</div>
+
+	{% block search %}{% include "include/search.html" %}{% endblock search %}
+
+</div>
